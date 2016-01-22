@@ -2,7 +2,7 @@
 """
 A drop-in replacement for the Mic class that allows for all I/O to occur
 over the terminal. Useful for debugging. Unlike with the typical Mic
-implementation, Jasper is always active listening with local_mic.
+implementation, Chronos is always active listening with local_mic.
 """
 
 
@@ -13,7 +13,7 @@ class Mic:
         return
 
     def passiveListen(self, PERSONA):
-        return True, "JASPER"
+        return True, "CHRONOS"
 
     def activeListenToAllOptions(self, THRESHOLD=None, LISTEN=True,
                                  MUSIC=False):
@@ -29,4 +29,4 @@ class Mic:
         return input
 
     def say(self, phrase, OPTIONS=None):
-        print("JASPER: %s" % phrase)
+        print("CHRONOS: %s" % phrase)

@@ -9,13 +9,13 @@ import logging
 import yaml
 import argparse
 
-from client import tts, stt, jasperpath, diagnose
+from client import tts, stt, chronospath, diagnose
 from client.conversation import Conversation
 
-# Add jasperpath.LIB_PATH to sys.path
-sys.path.append(jasperpath.LIB_PATH)
+# Add chronospath.LIB_PATH to sys.path
+sys.path.append(chronospath.LIB_PATH)
 
-parser = argparse.ArgumentParser(description='Jasper Voice Control Center')
+parser = argparse.ArgumentParser(description='Chronos Voice Control Center')
 parser.add_argument('--local', action='store_true',
                     help='Use text input instead of a real microphone')
 parser.add_argument('--no-network-check', action='store_true',
@@ -31,29 +31,29 @@ else:
     from client.mic import Mic
 
 
-class Jasper(object):
+class Chronos(object):
     def __init__(self):
         self._logger = logging.getLogger(__name__)
 
         # Create config dir if it does not exist yet
-        if not os.path.exists(jasperpath.CONFIG_PATH):
+        if not os.path.exists(chronospath.CONFIG_PATH):
             try:
-                os.makedirs(jasperpath.CONFIG_PATH)
+                os.makedirs(chronospath.CONFIG_PATH)
             except OSError:
                 self._logger.error("Could not create config dir: '%s'",
-                                   jasperpath.CONFIG_PATH, exc_info=True)
+                                   chronospath.CONFIG_PATH, exc_info=True)
                 raise
 
         # Check if config dir is writable
-        if not os.access(jasperpath.CONFIG_PATH, os.W_OK):
-            self._logger.critical("Config dir %s is not writable. Jasper " +
+        if not os.access(chronospath.CONFIG_PATH, os.W_OK):
+            self._logger.critical("Config dir %s is not writable. Chronos " +
                                   "won't work correctly.",
-                                  jasperpath.CONFIG_PATH)
+                                  chronospath.CONFIG_PATH)
 
         # FIXME: For backwards compatibility, move old config file to newly
         #        created config dir
-        old_configfile = os.path.join(jasperpath.LIB_PATH, 'profile.yml')
-        new_configfile = jasperpath.config('profile.yml')
+        old_configfile = os.path.join(chronospath.LIB_PATH, 'profile.yml')
+        new_configfile = chronospath.config('profile.yml')
         if os.path.exists(old_configfile):
             if os.path.exists(new_configfile):
                 self._logger.warning("Deprecated profile file found: '%s'. " +
@@ -114,15 +114,16 @@ class Jasper(object):
             salutation = "How can I be of service?"
         self.mic.say(salutation)
 
-        conversation = Conversation("JASPER", self.mic, self.config)
+        conversation = Conversation("CHRONOS", self.mic, self.config)
         conversation.handleForever()
 
 if __name__ == "__main__":
 
-    print("*******************************************************")
-    print("*             JASPER - THE TALKING COMPUTER           *")
-    print("* (c) 2015 Shubhro Saha, Charlie Marsh & Jan Holthuis *")
-    print("*******************************************************")
+    print("*********************************************************")
+    print("*                Chronos - Voice Computer               *")
+    print("* Control visual interfaces and devices with your voice *")
+    print("*              (c) 2015-2016 Roborzoid LLC              *")
+    print("*********************************************************")
 
     logging.basicConfig()
     logger = logging.getLogger()
@@ -132,7 +133,7 @@ if __name__ == "__main__":
         logger.setLevel(logging.DEBUG)
 
     if not args.no_network_check and not diagnose.check_network_connection():
-        logger.warning("Network not connected. This may prevent Jasper from " +
+        logger.warning("Network not connected. This may prevent Chronos from " +
                        "running properly.")
 
     if args.diagnose:
@@ -140,7 +141,7 @@ if __name__ == "__main__":
         sys.exit(0 if not failed_checks else 1)
 
     try:
-        app = Jasper()
+        app = Chronos()
     except Exception:
         logger.error("Error occured!", exc_info=True)
         sys.exit(1)

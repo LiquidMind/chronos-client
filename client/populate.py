@@ -5,7 +5,7 @@ from getpass import getpass
 import yaml
 from pytz import timezone
 import feedparser
-import jasperpath
+import chronospath
 
 
 def run():
@@ -27,7 +27,7 @@ def run():
     simple_request('last_name', 'Last name')
 
     # gmail
-    print("\nJasper uses your Gmail to send notifications. Alternatively, " +
+    print("\nChronos uses your Gmail to send notifications. Alternatively, " +
           "you can skip this step (or just fill in the email address if you " +
           "want to receive email notifications) and setup a Mailgun " +
           "account, as at http://jasperproject.github.io/documentation/" +
@@ -136,9 +136,9 @@ def run():
 
     # write to profile
     print("Writing to profile...")
-    if not os.path.exists(jasperpath.CONFIG_PATH):
-        os.makedirs(jasperpath.CONFIG_PATH)
-    outputFile = open(jasperpath.config("profile.yml"), "w")
+    if not os.path.exists(chronospath.CONFIG_PATH):
+        os.makedirs(chronospath.CONFIG_PATH)
+    outputFile = open(chronospath.config("profile.yml"), "w")
     yaml.dump(profile, outputFile, default_flow_style=False)
     print("Done.")
 

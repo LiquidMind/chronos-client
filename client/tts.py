@@ -1,6 +1,6 @@
 # -*- coding: utf-8-*-
 """
-A Speaker handles audio output from Jasper to the user
+A Speaker handles audio output from Chronos to the user
 
 Speaker methods:
     say - output 'phrase' as speech
@@ -39,7 +39,7 @@ except ImportError:
     pass
 
 import diagnose
-import jasperpath
+import chronospath
 
 
 class AbstractTTSEngine(object):
@@ -131,7 +131,7 @@ class DummyTTS(AbstractTTSEngine):
 
 class EspeakTTS(AbstractTTSEngine):
     """
-    Uses the eSpeak speech synthesizer included in the Jasper disk image
+    Uses the eSpeak speech synthesizer included in the Chronos disk image
     Requires espeak to be available
     """
 
@@ -150,7 +150,7 @@ class EspeakTTS(AbstractTTSEngine):
         config = {}
         # HMM dir
         # Try to get hmm_dir from config
-        profile_path = jasperpath.config('profile.yml')
+        profile_path = chronospath.config('profile.yml')
         if os.path.exists(profile_path):
             with open(profile_path, 'r') as f:
                 profile = yaml.safe_load(f)
@@ -272,7 +272,7 @@ class FliteTTS(AbstractTTSEngine):
         config = {}
         # HMM dir
         # Try to get hmm_dir from config
-        profile_path = jasperpath.config('profile.yml')
+        profile_path = chronospath.config('profile.yml')
         if os.path.exists(profile_path):
             with open(profile_path, 'r') as f:
                 profile = yaml.safe_load(f)
@@ -369,7 +369,7 @@ class PicoTTS(AbstractTTSEngine):
         config = {}
         # HMM dir
         # Try to get hmm_dir from config
-        profile_path = jasperpath.config('profile.yml')
+        profile_path = chronospath.config('profile.yml')
         if os.path.exists(profile_path):
             with open(profile_path, 'r') as f:
                 profile = yaml.safe_load(f)
@@ -441,7 +441,7 @@ class GoogleTTS(AbstractMp3TTSEngine):
         config = {}
         # HMM dir
         # Try to get hmm_dir from config
-        profile_path = jasperpath.config('profile.yml')
+        profile_path = chronospath.config('profile.yml')
         if os.path.exists(profile_path):
             with open(profile_path, 'r') as f:
                 profile = yaml.safe_load(f)
@@ -518,7 +518,7 @@ class MaryTTS(AbstractTTSEngine):
         config = {}
         # HMM dir
         # Try to get hmm_dir from config
-        profile_path = jasperpath.config('profile.yml')
+        profile_path = chronospath.config('profile.yml')
         if os.path.exists(profile_path):
             with open(profile_path, 'r') as f:
                 profile = yaml.safe_load(f)
@@ -597,7 +597,7 @@ class IvonaTTS(AbstractMp3TTSEngine):
         config = {}
         # HMM dir
         # Try to get hmm_dir from config
-        profile_path = jasperpath.config('profile.yml')
+        profile_path = chronospath.config('profile.yml')
         if os.path.exists(profile_path):
             with open(profile_path, 'r') as f:
                 profile = yaml.safe_load(f)
@@ -678,7 +678,7 @@ def get_engines():
             if hasattr(tts_engine, 'SLUG') and tts_engine.SLUG]
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Jasper TTS module')
+    parser = argparse.ArgumentParser(description='Chronos TTS module')
     parser.add_argument('--debug', action='store_true',
                         help='Show debug messages')
     args = parser.parse_args()

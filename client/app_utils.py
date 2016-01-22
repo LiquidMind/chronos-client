@@ -52,7 +52,7 @@ def emailUser(profile, SUBJECT="", BODY=""):
         if BODY:
             BODY = profile['first_name'] + \
                 ",<br><br>Here are your top headlines:" + BODY
-            BODY += "<br>Sent from your Jasper"
+            BODY += "<br>Sent from your Chronos"
 
         recipient = profile['gmail_address']
         if profile['first_name'] and profile['last_name']:
@@ -74,7 +74,7 @@ def emailUser(profile, SUBJECT="", BODY=""):
             password = profile['gmail_password']
             server = 'smtp.gmail.com'
         sendEmail(SUBJECT, BODY, recipient, user,
-                  "Jasper <jasper>", password, server)
+                  "Chronos <chronos>", password, server)
 
         return True
     except:

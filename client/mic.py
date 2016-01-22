@@ -8,7 +8,7 @@ import wave
 import audioop
 import pyaudio
 import alteration
-import jasperpath
+import chronospath
 
 
 class Mic:
@@ -22,9 +22,9 @@ class Mic:
 
         Arguments:
         speaker -- handles platform-independent audio output
-        passive_stt_engine -- performs STT while Jasper is in passive listen
+        passive_stt_engine -- performs STT while Chronos is in passive listen
                               mode
-        acive_stt_engine -- performs STT while Jasper is in active listen mode
+        acive_stt_engine -- performs STT while Chronos is in active listen mode
         """
         self._logger = logging.getLogger(__name__)
         self.speaker = speaker
@@ -210,7 +210,7 @@ class Mic:
         if THRESHOLD is None:
             THRESHOLD = self.fetchThreshold()
 
-        self.speaker.play(jasperpath.data('audio', 'beep_hi.wav'))
+        self.speaker.play(chronospath.data('audio', 'beep_hi.wav'))
 
         # prepare recording stream
         stream = self._audio.open(format=pyaudio.paInt16,
@@ -239,7 +239,7 @@ class Mic:
             if average < THRESHOLD * 0.8:
                 break
 
-        self.speaker.play(jasperpath.data('audio', 'beep_lo.wav'))
+        self.speaker.play(chronospath.data('audio', 'beep_lo.wav'))
 
         # save the audio data
         stream.stop_stream()
