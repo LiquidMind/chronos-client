@@ -110,12 +110,12 @@ class Chronos(object):
         if 'first_name' in self.config:
             salutation = ("How can I be of service, %s?"
                           % self.config["first_name"])
-            salutation = (u"Меня зовут Хронос. " + 
-						  u"Я - умные настенные часы с " +
+            salutation = (u"Меня зовут Корицы. " + 
+						  u"Я - похотливая сучка с " +
                           u"голосовым управлением. Я использую множество " +
                           u"существующих открытых технологий, чтобы иметь " +
                           u"возможность понимать и выполнять ваши команды. " +
-                          u"Как я могу вам помочь, о мой господин?")
+                          u"Как я могу вам помочь, ооо мой господин?")
         else:
             salutation = "How can I be of service?"
         self.mic.say(salutation)
