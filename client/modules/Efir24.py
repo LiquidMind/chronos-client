@@ -24,9 +24,9 @@ def handle(text, mic, profile):
     cmd = "mkfifo /tmp/efir24"
     subprocess.call(cmd)
 
-    cmd = "rtmpdump -r rtmp://stream.efir24.tv:1935/live/efir24tv --live" +
-          " -o /tmp/efir24 | omxplayer --vol 1000 -o local -b --alpha 255" +
-          " /tmp/efir24";
+    cmd = ("rtmpdump -r rtmp://stream.efir24.tv:1935/live/efir24tv --live" +
+           " -o /tmp/efir24 | omxplayer --vol 1000 -o local -b --alpha 255" +
+           " /tmp/efir24")
     subprocess.call(cmd)
 
 def isValid(text):
