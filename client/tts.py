@@ -73,7 +73,7 @@ class AbstractTTSEngine(object):
     def play(self, filename):
         # FIXME: Use platform-independent audio-output here
         # See issue jasperproject/jasper-client#188
-        cmd = ['aplay', '-D', 'plughw:1,0', str(filename)]
+        cmd = ['aplay', '-D', 'hw:ALSA,0', str(filename)]
         self._logger.debug('Executing %s', ' '.join([pipes.quote(arg)
                                                      for arg in cmd]))
         with tempfile.TemporaryFile() as f:
@@ -470,7 +470,7 @@ class GoogleTTS(AbstractMp3TTSEngine):
             tmpfile = f.name
         tts.save(tmpfile)
         self.play_mp3(tmpfile)
-        os.remove(tmpfile)
+#        os.remove(tmpfile)
 
 
 class MaryTTS(AbstractTTSEngine):
