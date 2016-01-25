@@ -481,7 +481,7 @@ class GoogleTTS(AbstractMp3TTSEngine):
             tmpfile = f.name
         tts.save(tmpfile)
         self.play_mp3(tmpfile)
-#        os.remove(tmpfile)
+        os.remove(tmpfile)
 
 
 class MaryTTS(AbstractTTSEngine):

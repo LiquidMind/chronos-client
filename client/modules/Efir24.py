@@ -1,10 +1,11 @@
-# -*- coding: utf-8-*-
+## -*- coding: utf-8-*-
 import datetime
 import re
+import subprocess
 from client.app_utils import getTimezone
 from semantic.dates import DateService
 
-WORDS = ["EFIR", "TWENTY", "FOUR"]
+WORDS = ["TWENTY", "FOUR"]
 
 
 def handle(text, mic, profile):
@@ -18,8 +19,8 @@ def handle(text, mic, profile):
                    number)
     """
 
-    cmd = "sudo rm /tmp/efir24"
-    subprocess.call(cmd)
+#    cmd = "sudo rm /tmp/efir24"
+#    subprocess.call(cmd)
 
     cmd = "mkfifo /tmp/efir24"
     subprocess.call(cmd)
@@ -36,4 +37,4 @@ def isValid(text):
         Arguments:
         text -- user-input, typically transcribed speech
     """
-    return bool(re.search(r'\befir twenty four\b', text, re.IGNORECASE))
+    return bool(re.search(r'\btwenty four\b', text, re.IGNORECASE))
