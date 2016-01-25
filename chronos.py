@@ -110,8 +110,8 @@ class Chronos(object):
         if 'first_name' in self.config:
             salutation = ("How can I be of service, %s?"
                           % self.config["first_name"])
-            salutation = (u"Меня зовут Корицы. " + 
-						  u"Я - похотливая сучка с " +
+            salutation = (u"Меня зовут Корица. " + 
+						  u"Я - душа умных настенных часов " +
                           u"голосовым управлением. Я использую множество " +
                           u"существующих открытых технологий, чтобы иметь " +
                           u"возможность понимать и выполнять ваши команды. " +
