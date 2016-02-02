@@ -419,7 +419,7 @@ class GoogleSTT(AbstractSTTEngine):
         else:
             # Convert all results to uppercase
             results = tuple(result.upper() for result in results)
-            self._logger.info('Transcribed: %r', results)
+            self._logger.info('Transcribed: %r', '(%s)' % ', '.join([x for x in results]))
         return results
 
     @classmethod
