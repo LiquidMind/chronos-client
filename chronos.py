@@ -115,12 +115,12 @@ class Chronos(object):
                           #u"голосовым управлением. Я использую множество " +
                           #u"существующих открытых технологий, чтобы иметь " +
                           #u"возможность понимать и выполнять ваши команды. " +
-                          u"Как я могу вам помочь, ооо мой господин?")
+                          u"Я слушаю.")
         else:
             salutation = "How can I be of service?"
         self.mic.say(salutation)
 
-        conversation = Conversation("CHRONOS", self.mic, self.config)
+        conversation = Conversation(u"ГОЛУБЧИК", self.mic, self.config)
         conversation.handleForever()
 
 if __name__ == "__main__":
