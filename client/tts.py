@@ -335,8 +335,7 @@ class MacOSXTTS(AbstractTTSEngine):
 
     def say(self, phrase):
         self._logger.debug("Saying '%s' with '%s'", phrase, self.SLUG)
-        print "Phase: " + phrase
-        cmd = ['say', phrase]
+        cmd = ['say', str(phrase)]
         self._logger.debug('Executing %s', ' '.join([pipes.quote(arg)
                                                      for arg in cmd]))
         with tempfile.TemporaryFile() as f:

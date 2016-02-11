@@ -44,7 +44,6 @@ class Conversation(object):
                                threshold)
 
             if input:
-                self._logger.info("Input text is %s", input)
                 self.brain.query(input)
             else:
-                self.mic.say(u"Не понятно")
+                self.mic.say("Pardon?")
