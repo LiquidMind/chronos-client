@@ -301,12 +301,16 @@ class GoogleSTT(AbstractSTTEngine):
 
     SLUG = 'google'
 
-    def __init__(self, api_key=None, language='en-us'):
+    def __init__(self, api_key=None, language='ru-RU'):
+    # def __init__(self, api_key=None, language='en-EN'):
         # FIXME: get init args from config
         """
         Arguments:
         api_key - the public api key which allows access to Google APIs
         """
+        FORMAT = u'[%(asctime)-15s][%(levelname)s][%(funcName)s] %(message)s'
+        logging.basicConfig(format=FORMAT)
+        logging._defaultFormatter = logging.Formatter(u"%(message)s")
         self._logger = logging.getLogger(__name__)
         self._request_url = None
         self._language = None
@@ -419,7 +423,8 @@ class GoogleSTT(AbstractSTTEngine):
         else:
             # Convert all results to uppercase
             results = tuple(result.upper() for result in results)
-            self._logger.info('Transcribed: %r', '(%s)' % ', '.join([x for x in results]))
+            print '(%s)' % ', '.join([x for x in results])
+            self._logger.info('Transcribed by google: %r', '(%s)' % ', '.join([x for x in results]))
         return results
 
     @classmethod
