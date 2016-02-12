@@ -30,33 +30,61 @@ class Command:
         self.words = words  # type: list
         self.args = args  # type: list
         self.id = identifier  # type: int
+        self.parsedArgs = []
 
     def checkOutput(self, text):
-        return Command._checkInCollection_(self.words, text) and Command._checkInCollection_(self.args, text)
+        self.parsedArgs = Command._getArgs_(self.args, text)
+        return Command._checkInWordCollection_(self.words, text)
 
     @staticmethod
-    def _checkInCollection_(collection, text):
+    def _checkInWordCollection_(collection, text):
         if len(collection) == 0:
             return True
-        for k in collection:
-            if k in text:
-                print u"word %s in %s" % (k, text)
+        for word in collection:
+            if word.lower() in text and word != u"":
+                print u"word %s in %s" % (word, text)
                 return True
         return False
 
+    @staticmethod
+    def _getArgs_(collection, text):
+        text = text.lower()
+        if len(collection) == 0:
+            return []
+        print u'collection %s' % collection[1]
+        args = []
+        synonyms = collection[0]
+
+        checkedWords = []
+
+        for index, synonymTuple in enumerate(synonyms):
+            for word in synonymTuple:
+                checkedWords.append(word.lower())
+                if word.lower() in text and word != u'':
+                    print u'append %s' % collection[1][index]
+                    args.append(collection[1][index])
+                    break
+        print checkedWords
+        return args
+
     def generateJSON(self):
-        return {'key': self.id}
+        return {'key': self.id, 'args': self.parsedArgs}
 
 
 # TODO 09.02.16 commands
-commandList = [Command([u'позвони'], [u'мансуру', u'асхату', u'феде'], 1),
-               Command([u'набери'], [u'мансура', u'асхата', u'федю'], 2),
+commandList = [Command([u'позвони'], [[(u'мансуру', u'mansur', u'monster'), (u'асхату', u'асхат'), (u'феде', u'федя')],
+                                      [u'mansur', u'asxat', u'fedya']], 1),
+               Command([u'набери'],
+                       [[(u'мансура',), (u'асхата', u'асхатов', u' асхат'), (u'федю', u'сейчас', u'хейзел', u'север')],
+                        [u'mansur', u'asxat', u'fedya']], 1),
                Command([u'алло', u'принять', u'принять звонок', u'принять входящий', u'принять входящий звонок',
                         u'ответить', u'ответь', u''], [], 3),
                Command([u'отклонить', u'отклонить вызов', u'отколони вызов',
                         u'положи трубку', u'положить трубку'], [], 4),
-               Command([u'отбой', u'завершить', u'завершить вызов', u'клади трубку'], [], 5),
-               Command([u'выключись', u'пора спать', u'отключение'], [], 6)]  # type: list[Command]
+               Command(
+                   [u'отбой', u'завершить', u'завершить вызов', u'завершить вызов', u'решить вызов' u'клади трубку'],
+                   [], 2)
+               ]
 
 
 def getServerInstance():
