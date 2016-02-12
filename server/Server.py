@@ -27,7 +27,10 @@ class ServerSide:
 
     def send(self, json):
         print "send %s" % json
-        self.server.send(json)
+        if self.is_accepted:
+            self.server.send(json)
+        else:
+            print "there is no connected users"
 
 
 phases = {}
