@@ -120,7 +120,7 @@ class Chronos(object):
             salutation = "How can I be of service?"
         self.mic.say(salutation)
 
-        conversation = Conversation(u"ГОЛУБЧИК", self.mic, self.config)
+        conversation = Conversation([u"ГОЛУБЧИК", u"ГОЛУБЦЫ"], self.mic, self.config)
         conversation.handleForever()
 
 if __name__ == "__main__":

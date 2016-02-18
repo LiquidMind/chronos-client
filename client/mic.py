@@ -90,6 +90,9 @@ class Mic:
         """
         Listens for PERSONA in everyday sound. Times out after LISTEN_TIME, so
         needs to be restarted.
+
+        Args:
+            PERSONA: list of related words, zero is real keyword
         """
 
         THRESHOLD_MULTIPLIER = 1.8
@@ -178,8 +181,12 @@ class Mic:
             # check if PERSONA was said
             transcribed = self.passive_stt_engine.transcribe(f)
 
-        if any(PERSONA in phrase for phrase in transcribed):
-            return (THRESHOLD, PERSONA)
+        # if any(PERSONA in phrase for phrase in transcribed):
+        #     return (THRESHOLD, PERSONA)
+
+        for pers in PERSONA:
+            if any(pers in phrase for phrase in transcribed):
+                return (THRESHOLD, PERSONA[0])
 
         return (False, transcribed)
 
