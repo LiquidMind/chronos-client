@@ -72,7 +72,7 @@ class Command:
 
 
 # TODO 09.02.16 commands
-commandList = [Command([u'позвони'], [[(u'мансуру', u'mansur', u'monster', u''), (u'асхату', u'асхат'), (u'феде', u'федя')],
+commandList = [Command([u'позвони', u'звони'], [[(u'мансуру', u'mansur', u'monster', u'максиму', u'мансуров'), (u'асхату', u'асхат'), (u'феде', u'федя')],
                                       [u'mansur', u'asxat', u'fedya']], 1),
                Command([u'набери'],
                        [[(u'мансура',), (u'асхата', u'асхатов', u' асхат'), (u'федю', u'сейчас', u'хейзел', u'север')],
@@ -98,6 +98,3 @@ def getServerInstance():
         print 'init it'
         globals()['server_key'] = ServerSide()
     return globals()['server_key']
-
-
-getServerInstance()
