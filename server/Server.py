@@ -32,5 +32,8 @@ class ServerSide:
         else:
             print "there is no connected users"
 
+    def close(self):
+        if self.is_accepted:
+            self.server.close()
 
 phases = {}
